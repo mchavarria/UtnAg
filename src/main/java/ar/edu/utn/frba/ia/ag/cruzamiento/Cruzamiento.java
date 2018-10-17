@@ -1,9 +1,9 @@
-package main.java.ar.edu.utn.frba.ia.ag.cruzamiento;
+package ar.edu.utn.frba.ia.ag.cruzamiento;
+
+import ar.edu.utn.frba.ia.ag.Individuo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 
 public abstract class Cruzamiento {
 	

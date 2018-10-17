@@ -1,4 +1,4 @@
-package main.java.ar.edu.utn.frba.ia.ag;
+package ar.edu.utn.frba.ia.ag;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

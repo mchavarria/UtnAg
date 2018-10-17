@@ -1,8 +1,8 @@
-package main.java.ar.edu.utn.frba.ia.ag.paro;
+package ar.edu.utn.frba.ia.ag.paro;
 
 import java.util.List;
 
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
+import ar.edu.utn.frba.ia.ag.Individuo;
 
 public class AptitudMinimaPromedio extends CriterioDeParo {
 	

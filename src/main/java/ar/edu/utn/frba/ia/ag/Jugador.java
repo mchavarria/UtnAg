@@ -1,6 +1,4 @@
-package main.java.ar.edu.utn.frba.ia.ag;
-
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
+package ar.edu.utn.frba.ia.ag;
 
 public class Jugador extends Individuo {
 	

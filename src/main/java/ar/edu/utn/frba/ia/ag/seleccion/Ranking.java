@@ -1,10 +1,10 @@
-package main.java.ar.edu.utn.frba.ia.ag.seleccion;
+package ar.edu.utn.frba.ia.ag.seleccion;
 
 import java.util.Collections;
 import java.util.List;
 
-import main.java.ar.edu.utn.frba.ia.ag.Estado;
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
+import ar.edu.utn.frba.ia.ag.Estado;
+import ar.edu.utn.frba.ia.ag.Individuo;
 
 public class Ranking extends Seleccion {
 	

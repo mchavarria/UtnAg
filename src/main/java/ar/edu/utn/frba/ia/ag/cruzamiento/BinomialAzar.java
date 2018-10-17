@@ -1,6 +1,6 @@
-package main.java.ar.edu.utn.frba.ia.ag.cruzamiento;
+package ar.edu.utn.frba.ia.ag.cruzamiento;
 
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
+import ar.edu.utn.frba.ia.ag.Individuo;
 
 public class BinomialAzar extends Cruzamiento {
 	
