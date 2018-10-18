@@ -14,8 +14,8 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        Configuracion configuracion = new Configuracion(new AptitudMinimaPromedio(0.7), 1000,
-                new Ranking(100), new BinomialAzar(), new MutacionSimple(0.5));
+        Configuracion configuracion = new Configuracion(new AptitudMinimaPromedio(40), 100000,
+                new Ranking(900), new BinomialAzar(), new MutacionSimple(0.5));
         AlgoritmoGenetico algoritmoGenetico = new AlgoritmoGenetico(configuracion, Jugador.class);
 
         Individuo resultado = algoritmoGenetico.ejecutar();
