@@ -23,12 +23,7 @@ public class AptitudMinimaPromedio extends CriterioDeParo {
 			totalAptitud += individuo.aptitud();
 		}
 		
-		if (totalAptitud / individuos.size() >= aptitudMinimaPromedio) {
-			return Boolean.TRUE;
-		}
-		else {
-			return Boolean.FALSE;
-		}
+		return (totalAptitud / individuos.size() >= aptitudMinimaPromedio);
 	}
 	
 }
