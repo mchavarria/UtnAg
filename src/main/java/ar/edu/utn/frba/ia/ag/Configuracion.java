@@ -1,0 +1,76 @@
+package ar.edu.utn.frba.ia.ag;
+
+import ar.edu.utn.frba.ia.ag.cruzamiento.Cruzamiento;
+import ar.edu.utn.frba.ia.ag.mutacion.Mutacion;
+import ar.edu.utn.frba.ia.ag.paro.CriterioDeParo;
+import ar.edu.utn.frba.ia.ag.seleccion.Seleccion;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Configuracion {
+    protected CriterioDeParo criterioDeParo;
+    protected int poblacionInicial;
+    protected Seleccion metodoDeSeleccion;
+    protected Cruzamiento cruzamiento;
+    protected Mutacion mutacion;
+
+    Configuracion(CriterioDeParo criterioDeParo,
+                            int poblacionInicial,
+                            Seleccion metodoDeSeleccion,
+                            Cruzamiento cruzamiento,
+                            Mutacion mutacion) {
+
+        this.criterioDeParo = criterioDeParo;
+        this.poblacionInicial = poblacionInicial;
+        this.metodoDeSeleccion = metodoDeSeleccion;
+        this.cruzamiento = cruzamiento;
+        this.mutacion = mutacion;
+        this.setLogLevel();
+
+    }
+
+    public void setLogLevel() {
+        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.FINE);
+    }
+
+    public void setCriterioDeParo(CriterioDeParo criterioDeParo) {
+        this.criterioDeParo = criterioDeParo;
+    }
+
+    public void setPoblacionInicial(int poblacionInicial) {
+        this.poblacionInicial = poblacionInicial;
+    }
+
+    public void setMetodoDeSeleccion(Seleccion metodoDeSeleccion) {
+        this.metodoDeSeleccion = metodoDeSeleccion;
+    }
+
+    public void setCruzamiento(Cruzamiento cruzamiento) {
+        this.cruzamiento = cruzamiento;
+    }
+
+    public void setMutacion(Mutacion mutacion) {
+        this.mutacion = mutacion;
+    }
+
+    public CriterioDeParo getCriterioDeParo() {
+        return criterioDeParo;
+    }
+
+    public int getPoblacionInicial() {
+        return poblacionInicial;
+    }
+
+    public Seleccion getMetodoDeSeleccion() {
+        return metodoDeSeleccion;
+    }
+
+    public Cruzamiento getCruzamiento() {
+        return cruzamiento;
+    }
+
+    public Mutacion getMutacion() {
+        return mutacion;
+    }
+}
