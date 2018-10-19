@@ -8,30 +8,38 @@ public class AptitudMinimaPromedio extends CriterioDeParo {
 	
 	private double minValEstadistica = Double.MAX_VALUE;
 	private Integer minValCaracteristica;
+	private Integer corteIteracion;
 	
-	public AptitudMinimaPromedio(double valEstadistica, Integer valCaracteristica) {
+	public AptitudMinimaPromedio(double valEstadistica, Integer valCaracteristica, Integer corteIteracion) {
 		this.minValEstadistica = valEstadistica;
 		this.minValCaracteristica = valCaracteristica;
+		//En caso de no llegar a la combinación esperada
+		this.corteIteracion = corteIteracion;
 	}
 	
 	@Override
 	public Boolean parar(List<Individuo> individuos) {
 		
-		double totalEstadisticas = 0;
-		double totalCaracteristicas = 0;
-		double promEstadisticas = 0;
-		double promCaracteristicas = 0;
-		
-		for (Individuo individuo : individuos) {
+		if (this.corteIteracion > 0) {
+			double totalEstadisticas = 0;
+			double totalCaracteristicas = 0;
+			double promEstadisticas = 0;
+			double promCaracteristicas = 0;
 			
-			totalEstadisticas += individuo.obtenerPromedioEstadisticas();
-			totalCaracteristicas += individuo.obtenerPromedioCaracteristicas();
+			for (Individuo individuo : individuos) {
+				
+				totalEstadisticas += individuo.obtenerPromedioEstadisticas();
+				totalCaracteristicas += individuo.obtenerPromedioCaracteristicas();
+			}
+			
+			promEstadisticas = totalEstadisticas / individuos.size();
+			promCaracteristicas = totalCaracteristicas / individuos.size();
+			
+			this.corteIteracion--;
+			return (promEstadisticas >= minValEstadistica && promCaracteristicas >= minValCaracteristica);
 		}
 		
-		promEstadisticas = totalEstadisticas / individuos.size();
-		promCaracteristicas = totalCaracteristicas / individuos.size();
-		
-		return (promEstadisticas >= minValEstadistica && promCaracteristicas >= minValCaracteristica);
+		return true;
 	}
 	
 }

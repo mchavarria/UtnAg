@@ -10,10 +10,11 @@ import ar.edu.utn.frba.ia.ag.seleccion.Ranking;
  */
 public class App 
 {
-	static final int POBLACION_INICIAL = 10;
-	static final int CORTE_ESTADISTICA = 60;
-	static final int CORTE_CARACTERISTICA = 6;
-	static final int SELECCION_RANKING = 5;
+	static final int POBLACION_INICIAL = 30;
+	static final int CORTE_ESTADISTICA = 80;
+	static final int CORTE_ITERACION = 5000;
+	static final int CORTE_CARACTERISTICA = 4;
+	static final int SELECCION_RANKING = 12;
 	static final double MUTACION = 0.2;
 	
     public static void main( String[] args )
@@ -27,7 +28,7 @@ public class App
         System.out.println( "Característica Promedio de equipo mayor a: "+ CORTE_CARACTERISTICA);
         
         Configuracion configuracion = new Configuracion(
-	        		new AptitudMinimaPromedio(CORTE_ESTADISTICA, CORTE_CARACTERISTICA),
+	        		new AptitudMinimaPromedio(CORTE_ESTADISTICA, CORTE_CARACTERISTICA, CORTE_ITERACION),
 	        		POBLACION_INICIAL,
 	                new Ranking(SELECCION_RANKING, Jugador.class),
 	            	new BinomialAzar(),
