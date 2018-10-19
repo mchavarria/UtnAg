@@ -2,6 +2,7 @@ package ar.edu.utn.frba.ia.ag.seleccion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import ar.edu.utn.frba.ia.ag.Estado;
 import ar.edu.utn.frba.ia.ag.Individuo;

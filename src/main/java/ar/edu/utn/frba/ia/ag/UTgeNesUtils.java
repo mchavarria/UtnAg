@@ -2,6 +2,7 @@ package ar.edu.utn.frba.ia.ag;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class UTgeNesUtils {
@@ -61,5 +62,48 @@ public class UTgeNesUtils {
 
         return buffer.toString();
 
+    }
+    
+    public static Double caracteristicaEquipo(List<Individuo> individuos) {
+    	double caracteristica = 0;
+		
+		for (Individuo individuo : individuos) {
+			
+			caracteristica += individuo.obtenerPromedioCaracteristicas();
+		}
+		
+		return (caracteristica / individuos.size());
+    }
+    
+    public static Double estadisticaEquipo(List<Individuo> individuos) {
+    	double estadisticas = 0;
+		
+		for (Individuo individuo : individuos) {
+			
+			estadisticas += individuo.obtenerPromedioEstadisticas();
+		}
+		
+		return (estadisticas / individuos.size());
+    }
+    
+    public static String estadisticasEquipo(List<Individuo> individuos) {
+    	double aptitud = 0;
+		double caracteristicas = 0;
+    	double estadisticas = 0;
+    	double aptitudProm;
+		double caracteristicasProm;
+    	double estadisticasProm;
+		
+		for (Individuo individuo : individuos) {
+			aptitud += individuo.aptitud();
+			caracteristicas += individuo.obtenerPromedioCaracteristicas();
+			estadisticas += individuo.obtenerPromedioEstadisticas();
+		}
+		
+		aptitudProm = aptitud / individuos.size();
+		caracteristicasProm = caracteristicas / individuos.size();
+		estadisticasProm = estadisticas / individuos.size();
+		
+		return "Aptitud: "+aptitudProm+" Características: "+caracteristicasProm+" Estadísticas: "+estadisticasProm;
     }
 }

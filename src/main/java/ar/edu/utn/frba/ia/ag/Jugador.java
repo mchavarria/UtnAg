@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.ia.ag;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class Jugador extends Individuo {
 	
 	/**
@@ -9,19 +12,6 @@ public class Jugador extends Individuo {
 	 * Función H = Suma de características ponderadas
 	 * Función I = Ajuste por posible valuación del jugador
 	 */
-
-	// Total de características
-	static final int TOTAL_CARACTERISTICAS = 5;
-	
-	// Constantes de valoración de características
-	// Excelente = 8, 9, 10.
-	// Promedio = 4, 5, 6, 7.
-	// Mala = 1, 2, 3.
-	static final int CARACTERISTICA_EXCELENTE = 8;
-	static final int CARACTERISTICA_MALA = 3;
-
-	// Constante de valoración de estadísticas
-	static final int ESTADISTICA_BUENA = 50;
 	
 	// Estadísticas
 	
@@ -146,7 +136,7 @@ public class Jugador extends Individuo {
 		jug.setOps(Math.random() * 100);
 		jug.setAvg(Math.random() * 100);
 		jug.setPa(Math.random() * 100);
-		// La puntuación de las características es de 1 a 10
+		// La puntuación de las características es de 1 a 100
 		jug.setVelocidad(Math.random() * 10);
 		jug.setRapidez(Math.random() * 10);
 		jug.setFuerza(Math.random() * 10);
@@ -158,16 +148,20 @@ public class Jugador extends Individuo {
 	
 	@Override
 	public String toString() {
-		return "Jugador: OBP: " + obp + " | SLG: " + slg + " | OPS: " + ops + "| AVG: " + avg + "| PA: " + pa 
-				+ " | Velocidad: " + velocidad + " | Rapidez: " + rapidez + "| Fuerza: " + fuerza + "| Golpe: " + golpe + "| Mentalidad: " + mentalidad
-				+ " | Aptitud: " + this.aptitud();
+		//StringWriter stringWriter = new StringWriter();
+		//PrintWriter writer = new PrintWriter(stringWriter, true);
+		//writer.println("Jugador con Aptitud: " + this.aptitud() + " y Estadísticas:");
+		//writer.println("OBP: " + obp + " | SLG: " + slg + " | OPS: " + ops + "| AVG: " + avg + "| PA: " + pa);
+		//writer.println("Velocidad: " + velocidad + " | Rapidez: " + rapidez + "| Fuerza: " + fuerza + "| Golpe: " + golpe + "| Mentalidad: " + mentalidad);
+		//return stringWriter.toString();
+		return "Aptitud:"+this.aptitud()+"; AVG:"+avg+"; SLG:"+slg+"; OBP:"+obp+"; OPS:"+ops+"; PA:"+pa+"; FUERZA:"+fuerza+"; GOLPE:"+golpe+"; MENTALIDAD:"+mentalidad+"; RAPIDEZ:"+rapidez+"; VELOCIDAD:"+velocidad;
 	}
 
 	/*
 	 * Es la suma de las estadísticas ponderadas en combinación con las características.
 	 */
 	private Double aptitudG() {
-		return this.ponderarEstFuerza() + this.ponderarEstGolpe() + this.ponderarEstMentalidad() + this.ponderarEstRapidez() + this.ponderarEstVelocidad();
+		return this.ponderarEstFuerza() + this.ponderarEstGolpe() + this.ponderarEstMentalidad() + this.ponderarEstRapidez() + this.ponderarEstVelocidad() + this.ponderarOps();
 	}
 
 	/*
@@ -182,9 +176,20 @@ public class Jugador extends Individuo {
 	 * Establece la relación con el promedio de las características
 	 */
 	private Double aptitudI() {
-		Double total =  fuerza + golpe + mentalidad + rapidez + velocidad;
-		
-		return total / TOTAL_CARACTERISTICAS;
+		Double prom =  (fuerza + golpe + mentalidad + rapidez + velocidad) / JugadorConfig.TOTAL_CARACTERISTICAS;
+		Double aptGyH = this.aptitudG() + this.aptitudH();
+		Double val;
+		if (prom == 8 || prom == 7) {
+			val = (double) 0;
+		} else if (prom <= 3) {
+			val =  aptGyH * 0.9;
+		} else if (prom > 8) {
+			val = aptGyH * 0.8;
+		} else {
+			//4, 5, 6
+			val = aptGyH * 0.2;
+		}
+		return val;
 	}
 	
 	// Métodos con ponderación de las estadísticas relacionado con las características.
@@ -246,7 +251,7 @@ public class Jugador extends Individuo {
 	 * Una estadística es considerada buena por arriba del 50%
 	 */
 	private Boolean estadisticaEsBuena(Double val) {
-		if (val > ESTADISTICA_BUENA) {
+		if (val > JugadorConfig.ESTADISTICA_BUENA) {
 			return true;
 		}
 		
@@ -256,9 +261,9 @@ public class Jugador extends Individuo {
 	// Métodos con ponderación de las características
 	
 	private Double ponderarVelocidad() {
-		if (velocidad <= CARACTERISTICA_MALA) {
+		if (velocidad <= JugadorConfig.CARACTERISTICA_MALA) {
 			return (double) 0;
-		} else if (velocidad >= CARACTERISTICA_EXCELENTE) {
+		} else if (velocidad >= JugadorConfig.CARACTERISTICA_EXCELENTE) {
 			return 7.5;
 		} else {
 			return (double) 5;
@@ -266,9 +271,9 @@ public class Jugador extends Individuo {
 	}
 	
 	private Double ponderarRapidez() {
-		if (rapidez <= CARACTERISTICA_MALA) {
+		if (rapidez <= JugadorConfig.CARACTERISTICA_MALA) {
 			return (double) 0;
-		} else if (rapidez >= CARACTERISTICA_EXCELENTE) {
+		} else if (rapidez >= JugadorConfig.CARACTERISTICA_EXCELENTE) {
 			return 4.5;
 		} else {
 			return (double) 3;
@@ -276,9 +281,9 @@ public class Jugador extends Individuo {
 	}
 	
 	private Double ponderarFuerza() {
-		if (fuerza <= CARACTERISTICA_MALA) {
+		if (fuerza <= JugadorConfig.CARACTERISTICA_MALA) {
 			return (double) 0;
-		} else if (fuerza >= CARACTERISTICA_EXCELENTE) {
+		} else if (fuerza >= JugadorConfig.CARACTERISTICA_EXCELENTE) {
 			return 7.5;
 		} else {
 			return (double) 5;
@@ -286,9 +291,9 @@ public class Jugador extends Individuo {
 	}
 	
 	private Double ponderarGolpe() {
-		if (golpe <= CARACTERISTICA_MALA) {
+		if (golpe <= JugadorConfig.CARACTERISTICA_MALA) {
 			return (double) 0;
-		} else if (golpe >= CARACTERISTICA_EXCELENTE) {
+		} else if (golpe >= JugadorConfig.CARACTERISTICA_EXCELENTE) {
 			return 7.5;
 		} else {
 			return (double) 5;
@@ -296,12 +301,24 @@ public class Jugador extends Individuo {
 	}
 	
 	private Double ponderarMentalidad() {
-		if (mentalidad <= CARACTERISTICA_MALA) {
+		if (mentalidad <= JugadorConfig.CARACTERISTICA_MALA) {
 			return (double) 0;
-		} else if (mentalidad >= CARACTERISTICA_EXCELENTE) {
+		} else if (mentalidad >= JugadorConfig.CARACTERISTICA_EXCELENTE) {
 			return (double) 3;
 		} else {
 			return (double) 2;
 		}
+	}
+
+	public Double obtenerPromedioCaracteristicas() {
+		Double sum = fuerza + golpe + mentalidad + rapidez + velocidad;
+		
+		return sum / JugadorConfig.TOTAL_CARACTERISTICAS;
+	}
+	
+	public Double obtenerPromedioEstadisticas() {
+		Double sum = avg + slg + obp + ops + pa;
+		
+		return sum / JugadorConfig.TOTAL_CARACTERISTICAS;
 	}
 }

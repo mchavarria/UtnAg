@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 public abstract class Individuo implements Comparable<Individuo>, Cloneable {
 	
 	public abstract double aptitud();
+	public abstract Double obtenerPromedioEstadisticas();
+	public abstract Double obtenerPromedioCaracteristicas();
 	
 	/**
 	 * TODO documentar que si nadie me define el random tomo varias desiciones para generar los atributos:

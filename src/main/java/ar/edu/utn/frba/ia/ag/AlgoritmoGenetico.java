@@ -43,32 +43,41 @@ public class AlgoritmoGenetico {
         }
     }
 
-    public Individuo ejecutar() {
+    public void ejecutar() {
 
         this.generarPoblacionInicial(individuoClass);
 
-        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "Población inicial");
-
+        System.out.println( "Población inicial" );
         for (Individuo individuo : this.individuos) {
-            Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, individuo.toString());
+        	System.out.println( individuo.toString() );	
         }
-
+        
+        System.out.println( "Promedios Población: " + UTgeNesUtils.estadisticasEquipo(this.individuos) );	
+        
+        Integer pasada = 1;
         while (!this.configuracion.getCriterioDeParo().parar(this.individuos)) {
 
-            this.estado.generarEstadisticas(individuos);
+            this.estado.generarEstadisticas(this.individuos);
 
             this.seleccion();
-
             this.cruzamiento();
 
+            System.out.println( "" );
+            System.out.println( "Pasada #"+pasada+" - Población:" );
+            for (Individuo individuo : this.individuos) {
+            	System.out.println( individuo.toString() );	
+            }
+            System.out.println( "Promedios Población: " + UTgeNesUtils.estadisticasEquipo(this.individuos) );
+
             this.mutacion();
+            pasada++;
         }
 
+        this.estado.generarEstadisticas(this.individuos);
+        
         Collections.sort(this.individuos);
 
         this.loggearEstado();
-
-        return this.individuos.get(0);
     }
 
     private void seleccion() {
@@ -85,28 +94,19 @@ public class AlgoritmoGenetico {
 
     private void loggearEstado() {
 
-        for (int i = 0; i < this.estado.getMejoresIndividuos().size(); i++) {
-
-            Individuo individuo = this.estado.getMejoresIndividuos().get(i);
-            Double aptitudPromedio = this.estado.getAptitudesPromedio().get(i);
-
-            Logger.getLogger(
-                    Logger.GLOBAL_LOGGER_NAME).log(
-                    Level.SEVERE,
-                    "Promedio: "
-                            + aptitudPromedio
-                            + " // Mejor Individuo "
-                            + individuo.toString());
-
-            System.out.println(this.estado.getMejoresIndividuos().get(i).aptitud() + "	"
-                    + this.estado.getAptitudesPromedio().get(i) + "	"
-                    + this.estado.getPeoresIndividuos().get(i).aptitud());
-        }
-
-        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Individuo mas Apto: " + this.individuos.get(0).toString());
-
-        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Cantidad de Veces que muto: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
-        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Individuo Campeon: " + this.estado.getMejorIndividuo());
-        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Peor Individuo: " + this.estado.getPeorIndividuo());
+        System.out.println( "" );
+        System.out.println( "----- Algoritmo Genérico Finalizado -----" );
+        System.out.println( "" );
+        System.out.println("Estadistica Promedio de Equipo Ultima Iteracion: "+UTgeNesUtils.estadisticaEquipo(this.individuos));
+        System.out.println("Mejor Estadistica Promedio de Equipo Histórica: "+this.estado.getMejorEstadisticaPromedio());
+        System.out.println("Peor Estadistica Promedio de Equipo  Histórica: "+this.estado.getPeorEstadisticaPromedio());
+        System.out.println("Caracteristica Promedio de Equipo Ultima Iteracion: "+UTgeNesUtils.caracteristicaEquipo(this.individuos));
+        System.out.println("Mejor Caracteristica Promedio de Equipo Histórica: "+this.estado.getMejorCaracteristicaPromedio());
+        System.out.println("Peor Caracteristica Promedio de Equipo  Histórica: "+this.estado.getPeorCaracteristicaPromedio());
+        System.out.println("Mejor Individuo Ultima Iteracion: "+this.individuos.get(0).toString());
+        System.out.println("Mejor Individuo Histórico: "+this.estado.getMejorIndividuo().toString());
+        System.out.println("Peor Individuo Ultima Iteracion: "+this.individuos.get(this.individuos.size()-1).toString());
+        System.out.println("Peor Individuo Histórico: "+this.estado.getPeorIndividuo().toString());;
+        System.out.println("Cantidad de Mutaciones: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
     }
 }

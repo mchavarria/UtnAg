@@ -9,6 +9,8 @@ public class Estado {
     private List<Double> totalAptitudes = new ArrayList<Double>(); // suma total de aptitudes de al corrida actual
     private List<Individuo> mejoresIndividuos = new ArrayList<Individuo>();
     private List<Individuo> peoresIndividuos = new ArrayList<Individuo>();
+    private List<Double> estadisticasPromedio = new ArrayList<Double>();
+    private List<Double> caracteristicasPromedio = new ArrayList<Double>();
     private int ciclos = 0;
     private int cantMutaciones = 0;
 
@@ -28,6 +30,42 @@ public class Estado {
         this.peoresIndividuos.add(peorIndividuo);
     }
 
+    public void agregarEstadisticasPromedio(Double promedio) {
+        this.estadisticasPromedio.add(promedio);
+    }
+
+    public void agregarCaracteristicasPromedio(Double promedio) {
+        this.caracteristicasPromedio.add(promedio);
+    }
+
+    public Double getMejorCaracteristicaPromedio() {
+
+    	Collections.sort(this.caracteristicasPromedio);
+
+        return this.caracteristicasPromedio.isEmpty() ? null : this.caracteristicasPromedio.get(0);
+    }
+
+    public Double getPeorCaracteristicaPromedio() {
+    	
+    	Collections.sort(this.caracteristicasPromedio);
+
+        return this.caracteristicasPromedio.isEmpty() ? null : this.caracteristicasPromedio.get(this.caracteristicasPromedio.size() - 1);
+    }
+
+    public Double getMejorEstadisticaPromedio() {
+
+    	Collections.sort(this.estadisticasPromedio);
+
+        return this.estadisticasPromedio.isEmpty() ? null : this.estadisticasPromedio.get(0);
+    }
+
+    public Double getPeorEstadisticaPromedio() {
+    	
+    	Collections.sort(this.estadisticasPromedio);
+
+        return this.estadisticasPromedio.isEmpty() ? null : this.estadisticasPromedio.get(this.estadisticasPromedio.size() - 1);
+    }
+    
     public Individuo getMejorIndividuo() {
 
         List<Individuo> mejoresIndividuos = this.mejoresIndividuos; // para no romer el orden original
@@ -103,5 +141,7 @@ public class Estado {
         this.agregarAptitudesPromedio(totalAptitudes / individuos.size());
         this.agregarMejorIndividuo(mejorIndividuo);
         this.agregarPeorIndividuo(peorIndividuo);
+        this.agregarEstadisticasPromedio(UTgeNesUtils.estadisticaEquipo(individuos));
+        this.agregarCaracteristicasPromedio(UTgeNesUtils.caracteristicaEquipo(individuos));
     }
 }

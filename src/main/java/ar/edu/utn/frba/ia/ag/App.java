@@ -6,20 +6,38 @@ import ar.edu.utn.frba.ia.ag.paro.AptitudMinimaPromedio;
 import ar.edu.utn.frba.ia.ag.seleccion.Ranking;
 
 /**
- * Hello world!
  *
  */
 public class App 
 {
+	static final int POBLACION_INICIAL = 10;
+	static final int CORTE_ESTADISTICA = 60;
+	static final int CORTE_CARACTERISTICA = 6;
+	static final int SELECCION_RANKING = 5;
+	static final double MUTACION = 0.2;
+	
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        Configuracion configuracion = new Configuracion(new AptitudMinimaPromedio(40), 100000,
-                new Ranking(900), new BinomialAzar(), new MutacionSimple(0.5));
+        System.out.println( "----- Configuración del Algoritmo Genérico  -----" );
+        System.out.println( "Población Inicial: "+ POBLACION_INICIAL);
+        System.out.println( "Mutación: "+MUTACION*100+"%");
+        System.out.println( "Selección \'RANKING\': "+ SELECCION_RANKING+" Individuos");
+        System.out.println( "Corte \'Aptitud Mínima Promedio\' ");
+        System.out.println( "Estadística Promedio de equipo mayor a: "+ CORTE_ESTADISTICA+"%");
+        System.out.println( "Característica Promedio de equipo mayor a: "+ CORTE_CARACTERISTICA);
+        
+        Configuracion configuracion = new Configuracion(
+	        		new AptitudMinimaPromedio(CORTE_ESTADISTICA, CORTE_CARACTERISTICA),
+	        		POBLACION_INICIAL,
+	                new Ranking(SELECCION_RANKING, Jugador.class),
+	            	new BinomialAzar(),
+	            	new MutacionSimple(MUTACION)
+            	);
         AlgoritmoGenetico algoritmoGenetico = new AlgoritmoGenetico(configuracion, Jugador.class);
 
-        Individuo resultado = algoritmoGenetico.ejecutar();
-        System.out.println(resultado);
+        System.out.println( "" );
+        System.out.println( "----- Se inicia el Algoritmo Genérico  -----" );
+        algoritmoGenetico.ejecutar();
 
     }
 }
