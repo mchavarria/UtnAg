@@ -19,6 +19,7 @@ public class App
 	
     public static void main( String[] args )
     {
+        FileUtils.inicializarCorrida();
         FileUtils.agregarTexto( "----- Configuración del Algoritmo Genérico  -----" );
         FileUtils.agregarTexto( "Población Inicial: "+ POBLACION_INICIAL);
         FileUtils.agregarTexto( "Mutación: "+MUTACION*100+"%");

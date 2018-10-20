@@ -46,7 +46,6 @@ public class AlgoritmoGenetico {
     }
 
     public void ejecutar() {
-        FileUtils.inicializarCorrida();
 
         this.generarPoblacionInicial(individuoClass);
 
