@@ -10,6 +10,7 @@ public class Estado {
     private List<Individuo> mejoresIndividuos = new ArrayList<Individuo>();
     private List<Individuo> peoresIndividuos = new ArrayList<Individuo>();
     private List<Double> estadisticasPromedio = new ArrayList<Double>();
+    private List<Double> aptitudPromedio = new ArrayList<Double>();
     private List<Double> caracteristicasPromedio = new ArrayList<Double>();
     private int ciclos = 0;
     private int cantMutaciones = 0;
@@ -29,9 +30,13 @@ public class Estado {
     public void agregarPeorIndividuo(Individuo peorIndividuo) {
         this.peoresIndividuos.add(peorIndividuo);
     }
-
+    
     public void agregarEstadisticasPromedio(Double promedio) {
         this.estadisticasPromedio.add(promedio);
+    }
+    
+    public void agregarAptitudPromedio(Double promedio) {
+        this.aptitudPromedio.add(promedio);
     }
 
     public void agregarCaracteristicasPromedio(Double promedio) {
@@ -57,6 +62,20 @@ public class Estado {
     	Collections.sort(this.estadisticasPromedio);
 
         return this.estadisticasPromedio.isEmpty() ? null : this.estadisticasPromedio.get(0);
+    }
+
+    public Double getPeorAptitudPromedio() {
+    	
+    	Collections.sort(this.aptitudPromedio);
+
+        return this.aptitudPromedio.isEmpty() ? null : this.aptitudPromedio.get(this.aptitudPromedio.size() - 1);
+    }
+
+    public Double getMejorAptitudPromedio() {
+
+    	Collections.sort(this.aptitudPromedio);
+
+        return this.aptitudPromedio.isEmpty() ? null : this.aptitudPromedio.get(0);
     }
 
     public Double getPeorEstadisticaPromedio() {
@@ -143,5 +162,6 @@ public class Estado {
         this.agregarPeorIndividuo(peorIndividuo);
         this.agregarEstadisticasPromedio(UTgeNesUtils.estadisticaEquipo(individuos));
         this.agregarCaracteristicasPromedio(UTgeNesUtils.caracteristicaEquipo(individuos));
+        this.agregarAptitudPromedio(UTgeNesUtils.aptitudEquipo(individuos));
     }
 }

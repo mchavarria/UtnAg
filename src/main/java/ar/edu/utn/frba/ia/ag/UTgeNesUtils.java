@@ -74,7 +74,17 @@ public class UTgeNesUtils {
 		
 		return (caracteristica / individuos.size());
     }
-    
+
+    public static Double aptitudEquipo(List<Individuo> individuos) {
+    	double total = 0;
+		
+		for (Individuo individuo : individuos) {
+			
+			total += individuo.aptitud();
+		}
+		
+		return (total / individuos.size());
+    }
     public static Double estadisticaEquipo(List<Individuo> individuos) {
     	double estadisticas = 0;
 		

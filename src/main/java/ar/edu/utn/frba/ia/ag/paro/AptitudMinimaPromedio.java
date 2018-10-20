@@ -23,20 +23,24 @@ public class AptitudMinimaPromedio extends CriterioDeParo {
 		if (this.corteIteracion > 0) {
 			double totalEstadisticas = 0;
 			double totalCaracteristicas = 0;
+			double totalAptitud = 0;
 			double promEstadisticas = 0;
+			double promAptitud = 0;
 			double promCaracteristicas = 0;
 			
 			for (Individuo individuo : individuos) {
-				
+				totalAptitud += individuo.aptitud();
 				totalEstadisticas += individuo.obtenerPromedioEstadisticas();
 				totalCaracteristicas += individuo.obtenerPromedioCaracteristicas();
 			}
 			
 			promEstadisticas = totalEstadisticas / individuos.size();
 			promCaracteristicas = totalCaracteristicas / individuos.size();
+			promAptitud = totalAptitud / individuos.size();
 			
 			this.corteIteracion--;
-			return (promEstadisticas >= minValEstadistica && promCaracteristicas >= minValCaracteristica);
+			return (promAptitud >= minValEstadistica);
+			//return (promEstadisticas >= minValEstadistica && promCaracteristicas >= minValCaracteristica);
 		}
 		
 		return true;

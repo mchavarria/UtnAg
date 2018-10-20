@@ -28,7 +28,7 @@ public class Ranking extends Seleccion {
 		while (individuos.size() > this.cantSeleccion) {
 			individuos.remove(individuos.size() - 1);
 		}
-
+/*
 		while (cantPoblacion > individuos.size() ) {
 			try {
 				individuos.add(this.indClass.newInstance().generarRandom());
@@ -43,7 +43,8 @@ public class Ranking extends Seleccion {
 		}
 		
 		return individuos;
-		//return this.generarCopias(individuos, estado);
+		*/
+		return this.generarCopias(individuos, estado);
 	}
 	
 }

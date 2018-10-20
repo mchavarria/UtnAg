@@ -154,7 +154,10 @@ public class Jugador extends Individuo {
 		//writer.println("OBP: " + obp + " | SLG: " + slg + " | OPS: " + ops + "| AVG: " + avg + "| PA: " + pa);
 		//writer.println("Velocidad: " + velocidad + " | Rapidez: " + rapidez + "| Fuerza: " + fuerza + "| Golpe: " + golpe + "| Mentalidad: " + mentalidad);
 		//return stringWriter.toString();
-		return "Aptitud:"+this.aptitud()+"; AVG:"+avg+"; SLG:"+slg+"; OBP:"+obp+"; OPS:"+ops+"; PA:"+pa+"; FUERZA:"+fuerza+"; GOLPE:"+golpe+"; MENTALIDAD:"+mentalidad+"; RAPIDEZ:"+rapidez+"; VELOCIDAD:"+velocidad;
+		
+
+		return this.aptitud()+";"+avg+";"+slg+";"+obp+";"+ops+";"+pa+";"+fuerza+";"+golpe+";"+mentalidad+";"+rapidez+";"+velocidad;
+		//return "Aptitud:"+this.aptitud()+"; AVG:"+avg+"; SLG:"+slg+"; OBP:"+obp+"; OPS:"+ops+"; PA:"+pa+"; FUERZA:"+fuerza+"; GOLPE:"+golpe+"; MENTALIDAD:"+mentalidad+"; RAPIDEZ:"+rapidez+"; VELOCIDAD:"+velocidad;
 	}
 
 	/*

@@ -97,6 +97,9 @@ public class AlgoritmoGenetico {
         System.out.println( "" );
         System.out.println( "----- Algoritmo Genérico Finalizado -----" );
         System.out.println( "" );
+        System.out.println("Aptitud Promedio de Equipo Ultima Iteracion: "+UTgeNesUtils.aptitudEquipo(this.individuos));
+        System.out.println("Mejor Aptitud Promedio de Equipo Histórica: "+this.estado.getMejorAptitudPromedio());
+        System.out.println("Peor Aptitud Promedio de Equipo  Histórica: "+this.estado.getPeorAptitudPromedio());
         System.out.println("Estadistica Promedio de Equipo Ultima Iteracion: "+UTgeNesUtils.estadisticaEquipo(this.individuos));
         System.out.println("Mejor Estadistica Promedio de Equipo Histórica: "+this.estado.getMejorEstadisticaPromedio());
         System.out.println("Peor Estadistica Promedio de Equipo  Histórica: "+this.estado.getPeorEstadisticaPromedio());
