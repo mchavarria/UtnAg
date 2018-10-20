@@ -11,11 +11,11 @@ import ar.edu.utn.frba.ia.ag.utils.FileUtils;
  */
 public class App 
 {
-	static final int POBLACION_INICIAL = 10;
+	static final int POBLACION_INICIAL = 200;
 	static final int CORTE_APT_PROM = 60;
-	static final int CORTE_ITERACION = 1000;
-	static final int SELECCION_RANKING = 5;
-	static final double MUTACION = 0.2;
+	static final int CORTE_ITERACION = 5000;
+	static final int SELECCION_RANKING = 20;
+	static final double MUTACION = 0.9;
 	
     public static void main( String[] args )
     {

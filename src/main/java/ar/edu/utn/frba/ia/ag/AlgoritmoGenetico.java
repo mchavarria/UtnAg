@@ -67,6 +67,7 @@ public class AlgoritmoGenetico {
 
             FileUtils.agregarTexto( "" );
             FileUtils.agregarTexto( "Pasada #"+pasada+" - Población:" );
+        	Collections.sort(this.individuos);
             for (Individuo individuo : this.individuos) {
             	FileUtils.agregarTexto( individuo.toString() );	
             }

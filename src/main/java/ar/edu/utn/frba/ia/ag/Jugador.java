@@ -156,7 +156,7 @@ public class Jugador extends Individuo {
 		//return stringWriter.toString();
 		
 
-		return this.aptitud()+";"+avg+";"+slg+";"+obp+";"+ops+";"+pa+";"+fuerza+";"+golpe+";"+mentalidad+";"+rapidez+";"+velocidad;
+		return this.aptitud()+";"+this.obtenerPromedioCaracteristicas()+";"+this.obtenerPromedioEstadisticas()+";"+avg+";"+slg+";"+obp+";"+ops+";"+pa+";"+fuerza+";"+golpe+";"+mentalidad+";"+rapidez+";"+velocidad;
 		//return "Aptitud:"+this.aptitud()+"; AVG:"+avg+"; SLG:"+slg+"; OBP:"+obp+"; OPS:"+ops+"; PA:"+pa+"; FUERZA:"+fuerza+"; GOLPE:"+golpe+"; MENTALIDAD:"+mentalidad+"; RAPIDEZ:"+rapidez+"; VELOCIDAD:"+velocidad;
 	}
 
