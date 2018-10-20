@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.ia.ag;
 
+import ar.edu.utn.frba.ia.ag.utils.FileUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,12 +46,14 @@ public class AlgoritmoGenetico {
     }
 
     public void ejecutar() {
+        FileUtils.inicializarCorrida();
 
         this.generarPoblacionInicial(individuoClass);
 
         System.out.println( "Población inicial" );
         for (Individuo individuo : this.individuos) {
-        	System.out.println( individuo.toString() );	
+        	System.out.println( individuo.toString() );
+        	FileUtils.agregarTexto(individuo.toString());
         }
         
         System.out.println( "Promedios Población: " + UTgeNesUtils.estadisticasEquipo(this.individuos) );	
