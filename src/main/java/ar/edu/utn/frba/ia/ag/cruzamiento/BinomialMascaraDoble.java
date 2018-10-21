@@ -22,8 +22,8 @@ public class BinomialMascaraDoble extends Cruzamiento {
                 && mascaraB.replaceAll(Cruzamiento.X,"").replaceAll(Cruzamiento.Y, "").length() > 0;
     }
 
-    public BinomialMascaraDoble(String mascaraA, String mascaraB) {
-
+    public BinomialMascaraDoble(String mascaraA, String mascaraB, Boolean cruceAleatorio) {
+        super(cruceAleatorio);
         // Valido las mascaras
         if (mascarasInvalidas(mascaraA, mascaraB)) {
 

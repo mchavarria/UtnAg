@@ -5,7 +5,11 @@ import ar.edu.utn.frba.ia.ag.Individuo;
 public class BinomialAzar extends Cruzamiento {
 	
 	BinomialMascaraDoble cruzamientoAuxiliarMascara;
-	
+
+	public BinomialAzar(Boolean cruceAleatorio) {
+		super(cruceAleatorio);
+	}
+
 	@Override
 	protected void cruzar(Individuo padreA, Individuo padreB) {
 		this.getCruzamientoAuxiliar(padreA).cruzar(padreA, padreB);
@@ -35,7 +39,7 @@ public class BinomialAzar extends Cruzamiento {
 				}
 			}
 			
-			this.cruzamientoAuxiliarMascara = new BinomialMascaraDoble(mascaraA.toString(), mascaraB.toString());
+			this.cruzamientoAuxiliarMascara = new BinomialMascaraDoble(mascaraA.toString(), mascaraB.toString(), super.cruceAleatorio);
 		}
 		
 		return this.cruzamientoAuxiliarMascara;

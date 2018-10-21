@@ -31,7 +31,7 @@ public class App
 	        		new AptitudMinimaPromedio(CORTE_APT_PROM, CORTE_ITERACION),
 	        		POBLACION_INICIAL,
 	                new Ranking(SELECCION_RANKING, Jugador.class),
-	            	new BinomialAzar(),
+	            	new BinomialAzar(true),
 	            	new MutacionSimple(MUTACION)
             	);
         AlgoritmoGenetico algoritmoGenetico = new AlgoritmoGenetico(configuracion, Jugador.class);
