@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ar.edu.utn.frba.ia.ag.utils.FileUtils;
+import ar.edu.utn.frba.ia.ag.utils.StringUtils;
+
 public class Estado {
     private List<Double> aptitudesPromedio = new ArrayList<Double>();
     private List<Double> totalAptitudes = new ArrayList<Double>(); // suma total de aptitudes de al corrida actual
@@ -12,6 +15,7 @@ public class Estado {
     private List<Double> estadisticasPromedio = new ArrayList<Double>();
     private List<Double> aptitudPromedio = new ArrayList<Double>();
     private List<Double> caracteristicasPromedio = new ArrayList<Double>();
+    private List<String> valoresPromedioStr = new ArrayList<String>();
     private int ciclos = 0;
     private int cantMutaciones = 0;
 
@@ -39,50 +43,54 @@ public class Estado {
         this.aptitudPromedio.add(promedio);
     }
 
+    public void agregarValoresPromedioStr(String promedio) {
+        this.valoresPromedioStr.add(promedio);
+    }
+    
     public void agregarCaracteristicasPromedio(Double promedio) {
         this.caracteristicasPromedio.add(promedio);
     }
 
-    public Double getMejorCaracteristicaPromedio() {
+    public Double getPeorCaracteristicaPromedio() {
 
     	Collections.sort(this.caracteristicasPromedio);
 
         return this.caracteristicasPromedio.isEmpty() ? null : this.caracteristicasPromedio.get(0);
     }
 
-    public Double getPeorCaracteristicaPromedio() {
+    public Double getMejorCaracteristicaPromedio() {
     	
     	Collections.sort(this.caracteristicasPromedio);
 
         return this.caracteristicasPromedio.isEmpty() ? null : this.caracteristicasPromedio.get(this.caracteristicasPromedio.size() - 1);
     }
 
-    public Double getMejorEstadisticaPromedio() {
+    public Double getPeorEstadisticaPromedio() {
 
     	Collections.sort(this.estadisticasPromedio);
 
         return this.estadisticasPromedio.isEmpty() ? null : this.estadisticasPromedio.get(0);
     }
 
-    public Double getPeorAptitudPromedio() {
+    public Double getMejorEstadisticaPromedio() {
+    	
+    	Collections.sort(this.estadisticasPromedio);
+
+        return this.estadisticasPromedio.isEmpty() ? null : this.estadisticasPromedio.get(this.estadisticasPromedio.size() - 1);
+    }
+
+    public Double getMejorAptitudPromedio() {
     	
     	Collections.sort(this.aptitudPromedio);
 
         return this.aptitudPromedio.isEmpty() ? null : this.aptitudPromedio.get(this.aptitudPromedio.size() - 1);
     }
 
-    public Double getMejorAptitudPromedio() {
+    public Double getPeorAptitudPromedio() {
 
     	Collections.sort(this.aptitudPromedio);
 
         return this.aptitudPromedio.isEmpty() ? null : this.aptitudPromedio.get(0);
-    }
-
-    public Double getPeorEstadisticaPromedio() {
-    	
-    	Collections.sort(this.estadisticasPromedio);
-
-        return this.estadisticasPromedio.isEmpty() ? null : this.estadisticasPromedio.get(this.estadisticasPromedio.size() - 1);
     }
     
     public Individuo getMejorIndividuo() {
@@ -103,6 +111,10 @@ public class Estado {
         return peoresIndividuos.isEmpty() ? null : peoresIndividuos.get(peoresIndividuos.size() - 1);
     }
 
+    public List<String> getValoresPromediosStr() {
+        return valoresPromedioStr;
+    }
+    
     public List<Individuo> getMejoresIndividuos() {
         return mejoresIndividuos;
     }
@@ -135,7 +147,7 @@ public class Estado {
         return this.cantMutaciones;
     }
 
-    public void generarEstadisticas(List<Individuo> individuos) {
+    public void generarEstadisticas(List<Individuo> individuos, Integer pasada) {
 
         Double totalAptitudes = new Double(0);
         Individuo mejorIndividuo = individuos.get(0);
@@ -160,8 +172,13 @@ public class Estado {
         this.agregarAptitudesPromedio(totalAptitudes / individuos.size());
         this.agregarMejorIndividuo(mejorIndividuo);
         this.agregarPeorIndividuo(peorIndividuo);
-        this.agregarEstadisticasPromedio(UTgeNesUtils.estadisticaEquipo(individuos));
-        this.agregarCaracteristicasPromedio(UTgeNesUtils.caracteristicaEquipo(individuos));
-        this.agregarAptitudPromedio(UTgeNesUtils.aptitudEquipo(individuos));
+        Double eqEst = UTgeNesUtils.estadisticaEquipo(individuos);
+        Double eqCar = UTgeNesUtils.caracteristicaEquipo(individuos);
+        Double eqApt = UTgeNesUtils.aptitudEquipo(individuos);
+        this.agregarEstadisticasPromedio(eqEst);
+        this.agregarCaracteristicasPromedio(eqCar);
+        this.agregarAptitudPromedio(eqApt);
+        String valorPromedio = StringUtils.largoFijo((double) pasada,6) +';'+ StringUtils.largoFijo(eqApt, 8) +';'+ StringUtils.largoFijo(eqCar) +';'+ StringUtils.largoFijo(eqEst);
+        this.agregarValoresPromedioStr(valorPromedio);
     }
 }

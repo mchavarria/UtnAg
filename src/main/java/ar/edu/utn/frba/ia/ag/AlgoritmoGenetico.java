@@ -49,6 +49,7 @@ public class AlgoritmoGenetico {
 
         this.generarPoblacionInicial(individuoClass);
 
+        this.estado.generarEstadisticas(this.individuos, 0);
         FileUtils.agregarTexto( "Población inicial" );
         FileUtils.agregarTexto(StringUtils.columnasJugador());
         for (Individuo individuo : this.individuos) {
@@ -60,8 +61,6 @@ public class AlgoritmoGenetico {
         
         Integer pasada = 1;
         while (!this.configuracion.getCriterioDeParo().parar(this.individuos)) {
-
-            this.estado.generarEstadisticas(this.individuos);
 
             this.seleccion();
             this.cruzamiento();
@@ -76,19 +75,10 @@ public class AlgoritmoGenetico {
             FileUtils.agregarTexto( "Promedios Población: " + UTgeNesUtils.estadisticasEquipo(this.individuos) );
 
             this.mutacion();
+
+            this.estado.generarEstadisticas(this.individuos, pasada);
             pasada++;
         }
-
-        FileUtils.agregarTexto( "" );
-        FileUtils.agregarTexto( "Pasada #"+pasada+" - Población:" );
-    	Collections.sort(this.individuos);
-        FileUtils.agregarTexto(StringUtils.columnasJugador());
-        for (Individuo individuo : this.individuos) {
-        	FileUtils.agregarTexto( individuo.toString() );	
-        }
-        FileUtils.agregarTexto( "Promedios Población: " + UTgeNesUtils.estadisticasEquipo(this.individuos) );
-
-        this.estado.generarEstadisticas(this.individuos);
         
         Collections.sort(this.individuos);
 
@@ -138,6 +128,12 @@ public class AlgoritmoGenetico {
         FileUtils.agregarTexto("Peor Individuo Histórico:");
         FileUtils.agregarTexto(StringUtils.columnasJugador());
         FileUtils.agregarTexto(this.estado.getPeorIndividuo().toString());
+        FileUtils.agregarTexto( "" );
+        FileUtils.agregarTexto( "----- Valores Promedios por Equipo en cada pasada -----" );
+        FileUtils.agregarTexto(StringUtils.columnasValoresProm());
+        for (String promedio : estado.getValoresPromediosStr()) {
+        	FileUtils.agregarTexto( promedio );	
+        }
         //System.out.println("Cantidad de Mutaciones: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
     }
 }

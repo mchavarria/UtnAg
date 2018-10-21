@@ -47,4 +47,16 @@ public class StringUtils {
     	
     	return val;
     }
+
+    public static String columnasValoresProm() {
+    	
+    	String val = new StringBuilder()
+    		    .append(StringUtils.largoColFijo("PASADA", 6))
+    		    .append(StringUtils.largoColFijo(";APT_PROM", 8))
+    		    .append(StringUtils.largoColFijo(";CARACT_PROM", 17))
+    		    .append(StringUtils.largoColFijo(";ESTAD_PROM", 17))
+    		    .toString();
+    	
+    	return val;
+    }
 }
