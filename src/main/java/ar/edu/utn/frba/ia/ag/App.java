@@ -16,14 +16,22 @@ public class App
 	static final int CORTE_ITERACION = 5000;
 	static final int SELECCION_RANKING = 20;//Defecto 20
 	static final double MUTACION = 0.1;
+	static final Boolean AZAR = true;
 	
     public static void main( String[] args )
     {
+    	String cruzaTipo;
+    	if (AZAR) {
+    		cruzaTipo = "Azar";
+    	} else {
+    		cruzaTipo = "Mejor con Peor";
+    	}
         FileUtils.inicializarCorrida();
         FileUtils.agregarTexto( "----- Configuración del Algoritmo Genérico  -----" );
         FileUtils.agregarTexto( "Población Inicial: "+ POBLACION_INICIAL);
         FileUtils.agregarTexto( "Mutación: "+MUTACION*100+"%");
         FileUtils.agregarTexto( "Selección \'RANKING\': "+ SELECCION_RANKING+" Individuos");
+        FileUtils.agregarTexto( "Cruzamiento \'Binomial Azar\': "+ cruzaTipo);
         FileUtils.agregarTexto( "Corte \'Aptitud Mínima Promedio\' ");
         FileUtils.agregarTexto( "Aptitud Promedio de equipo mayor a: "+ CORTE_APT_PROM*100+"%");
         
@@ -31,7 +39,7 @@ public class App
 	        		new AptitudMinimaPromedio(CORTE_APT_PROM, CORTE_ITERACION),
 	        		POBLACION_INICIAL,
 	                new Ranking(SELECCION_RANKING, Jugador.class),
-	            	new BinomialAzar(true),
+	            	new BinomialAzar(AZAR),
 	            	new MutacionSimple(MUTACION)
             	);
         AlgoritmoGenetico algoritmoGenetico = new AlgoritmoGenetico(configuracion, Jugador.class);
@@ -46,6 +54,7 @@ public class App
         FileUtils.agregarTexto( "Población Inicial: "+ POBLACION_INICIAL);
         FileUtils.agregarTexto( "Mutación: "+MUTACION*100+"%");
         FileUtils.agregarTexto( "Selección \'RANKING\': "+ SELECCION_RANKING+" Individuos");
+        FileUtils.agregarTexto( "Cruzamiento \'Binomial Azar\': "+ cruzaTipo);
         FileUtils.agregarTexto( "Corte \'Aptitud Mínima Promedio\' ");
         FileUtils.agregarTexto( "Aptitud Promedio de equipo mayor a: "+ CORTE_APT_PROM*100+"%");
     }
