@@ -124,7 +124,7 @@ public class Estado {
     }
 
     public int getCorridas() {
-        return this.totalAptitudes.size();
+        return this.totalAptitudes.size()-1;
     }
 
     public void sumarMutacion() {

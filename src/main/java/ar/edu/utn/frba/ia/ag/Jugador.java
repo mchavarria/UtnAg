@@ -3,6 +3,8 @@ package ar.edu.utn.frba.ia.ag;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import ar.edu.utn.frba.ia.ag.utils.StringUtils;
+
 public class Jugador extends Individuo {
 	
 	/**
@@ -154,9 +156,23 @@ public class Jugador extends Individuo {
 		//writer.println("OBP: " + obp + " | SLG: " + slg + " | OPS: " + ops + "| AVG: " + avg + "| PA: " + pa);
 		//writer.println("Velocidad: " + velocidad + " | Rapidez: " + rapidez + "| Fuerza: " + fuerza + "| Golpe: " + golpe + "| Mentalidad: " + mentalidad);
 		//return stringWriter.toString();
-		
 
-		return this.aptitud()+";"+this.obtenerPromedioCaracteristicas()+";"+this.obtenerPromedioEstadisticas()+";"+avg+";"+slg+";"+obp+";"+ops+";"+pa+";"+fuerza+";"+golpe+";"+mentalidad+";"+rapidez+";"+velocidad;
+		String val = StringUtils.largoFijo(this.aptitud(), 8);
+		val += StringUtils.largoFijo(";"+this.obtenerPromedioCaracteristicas());
+		val += StringUtils.largoFijo(";"+this.obtenerPromedioEstadisticas());
+		val += StringUtils.largoFijo(";"+avg);
+		val += StringUtils.largoFijo(";"+slg);
+		val += StringUtils.largoFijo(";"+obp);
+		val += StringUtils.largoFijo(";"+ops);
+		val += StringUtils.largoFijo(";"+pa);
+		val += StringUtils.largoFijo(";"+fuerza);
+		val += StringUtils.largoFijo(";"+golpe);
+		val += StringUtils.largoFijo(";"+mentalidad);
+		val += StringUtils.largoFijo(";"+rapidez);
+		val += StringUtils.largoFijo(";"+velocidad);
+		
+		return val;
+		//return this.aptitud()+";"+this.obtenerPromedioCaracteristicas()+";"+this.obtenerPromedioEstadisticas()+";"+avg+";"+slg+";"+obp+";"+ops+";"+pa+";"+fuerza+";"+golpe+";"+mentalidad+";"+rapidez+";"+velocidad;
 		//return "Aptitud:"+this.aptitud()+"; AVG:"+avg+"; SLG:"+slg+"; OBP:"+obp+"; OPS:"+ops+"; PA:"+pa+"; FUERZA:"+fuerza+"; GOLPE:"+golpe+"; MENTALIDAD:"+mentalidad+"; RAPIDEZ:"+rapidez+"; VELOCIDAD:"+velocidad;
 	}
 
