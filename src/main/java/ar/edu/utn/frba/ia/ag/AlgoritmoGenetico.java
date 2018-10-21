@@ -72,6 +72,7 @@ public class AlgoritmoGenetico {
             for (Individuo individuo : this.individuos) {
             	FileUtils.agregarTexto( individuo.toString() );	
             }
+            FileUtils.agregarTexto( "" );
             FileUtils.agregarTexto( "Promedios Población: " + UTgeNesUtils.estadisticasEquipo(this.individuos) );
 
             this.mutacion();
@@ -99,6 +100,12 @@ public class AlgoritmoGenetico {
 
     private void loggearEstado() {
 
+        FileUtils.agregarTexto( "" );
+        FileUtils.agregarTexto( "----- Valores Promedios por Equipo en cada pasada -----" );
+        FileUtils.agregarTexto(StringUtils.columnasValoresProm());
+        for (String promedio : estado.getValoresPromediosStr()) {
+        	FileUtils.agregarTexto( promedio );	
+        }
         FileUtils.agregarTexto( "" );
         FileUtils.agregarTexto( "----- Algoritmo Genérico Finalizado -----" );
         FileUtils.agregarTexto( "" );
@@ -128,12 +135,6 @@ public class AlgoritmoGenetico {
         FileUtils.agregarTexto("Peor Individuo Histórico:");
         FileUtils.agregarTexto(StringUtils.columnasJugador());
         FileUtils.agregarTexto(this.estado.getPeorIndividuo().toString());
-        FileUtils.agregarTexto( "" );
-        FileUtils.agregarTexto( "----- Valores Promedios por Equipo en cada pasada -----" );
-        FileUtils.agregarTexto(StringUtils.columnasValoresProm());
-        for (String promedio : estado.getValoresPromediosStr()) {
-        	FileUtils.agregarTexto( promedio );	
-        }
         //System.out.println("Cantidad de Mutaciones: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
     }
 }
